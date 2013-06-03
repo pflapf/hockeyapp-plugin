@@ -18,7 +18,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.SystemDefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.client.HttpClient;
 import org.json.simple.parser.JSONParser;
@@ -99,7 +99,7 @@ public class HockeyappRecorder extends Recorder {
 					vars.expand(filePath), tempDir);
 			listener.getLogger().println(file);
 
-			HttpClient httpclient = new DefaultHttpClient();
+			HttpClient httpclient = new SystemDefaultHttpClient();
             HttpPost httpPost;
             if(useAppVersionURL) {
                 if (appId == null) {
@@ -275,7 +275,7 @@ public class HockeyappRecorder extends Recorder {
 
 	private boolean cleanupOldVersions(BuildListener listener) {
 		try {
-			HttpClient httpclient = new DefaultHttpClient();
+			HttpClient httpclient = new SystemDefaultHttpClient();
 			HttpPost httpPost = new HttpPost(
 			        "https://rink.hockeyapp.net/api/2/apps/" + appId
 						+ "/app_versions/delete");
