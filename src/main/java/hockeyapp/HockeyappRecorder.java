@@ -160,7 +160,7 @@ public class HockeyappRecorder extends Recorder {
                 }
                 entity.addPart("notes", new StringBody(sb.toString(), UTF8_CHARSET));
             } else if (buildNotes != null) {
-                entity.addPart("notes", new StringBody(vars.expand(buildNotes)));
+                entity.addPart("notes", new StringBody(vars.expand(buildNotes), UTF8_CHARSET));
             }
             entity.addPart("notes_type", new StringBody("0"));
 
