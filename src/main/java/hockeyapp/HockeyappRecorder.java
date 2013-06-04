@@ -30,10 +30,13 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.export.Exported;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.*;
 
 
 public class HockeyappRecorder extends Recorder {
+
+    private static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
     @Exported
     public String apiToken;
@@ -151,16 +154,11 @@ public class HockeyappRecorder extends Recorder {
                 //StringBuilder sb = new StringBuilder(super.buildCompletionMessage(publisher,build,listener));
                 StringBuilder sb = new StringBuilder();
                 if (!build.getChangeSet().isEmptySet()) {
-                    boolean hasManyChangeSets = build.getChangeSet().getItems().length > 1;
                     for (Entry entry : build.getChangeSet()) {
-                        sb.append("\n");
-                        if (hasManyChangeSets) {
-                            sb.append("- ");
-                        }
-                        sb.append(entry.getMsg());
+                        sb.append("\n- ").append(entry.getMsg());
                     }
                 }
-                entity.addPart("notes", new StringBody(sb.toString()));
+                entity.addPart("notes", new StringBody(sb.toString(), UTF8_CHARSET));
             } else if (buildNotes != null) {
                 entity.addPart("notes", new StringBody(vars.expand(buildNotes)));
             }
