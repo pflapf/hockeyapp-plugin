@@ -289,6 +289,7 @@ public class HockeyappRecorder extends Recorder {
             httpPost.setHeader("X-HockeyAppToken", apiToken);
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("keep", numberOldVersions));
+            nameValuePairs.add(new BasicNameValuePair("sort", "date"));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httpPost);
             HttpEntity resEntity = response.getEntity();
